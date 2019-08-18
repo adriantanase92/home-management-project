@@ -1,0 +1,15 @@
+@import '../../assets/style/_mixins.scss';
+
+.alerts{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 999999999;
+    .v-alert{
+        margin: 0.25rem auto 0;
+        opacity: 0.85;
+        @include border-radius(0);
+    }
+}

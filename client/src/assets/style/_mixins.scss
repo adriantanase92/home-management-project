@@ -1,0 +1,62 @@
+// Mixins
+@mixin font-face($name, $file) {
+    @font-face {
+        font-family: "#{$name}";
+        src: url("../fonts/#{$file}.eot");
+        src: url("../fonts/#{$file}.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/#{$file}.woff") format("woff"),
+        url("../fonts/#{$file}.ttf") format("truetype"),
+        url("../fonts/#{$file}.svg?#webfont") format("svg");
+    }
+}
+// @include font-face("My Font", my-font);
+
+@mixin box-shadow($value) {
+    -moz-box-shadow: $value;
+    -webkit-box-shadow: $value;
+    box-shadow: $value;           
+}
+
+@mixin border-radius($value) {
+    -moz-border-radius: $value;
+    -webkit-border-radius: $value;
+    border-radius: $value;           
+}
+
+@mixin transition($value) {
+    -webkit-transition: $value;
+    -moz-transition: $value;
+    -o-transition: $value;
+    transition: $value;
+}
+
+@mixin appearance($value) {
+    -webkit-appearance: $value;
+    -moz-appearance:    $value;
+    appearance:         $value;
+ }
+
+@mixin breakpoint($point) {
+    @if $point == large {
+        @media only screen and (min-width: 1366px) {
+            @content;
+        }
+    } 
+    @else if $point == desktop {
+        @media only screen and (min-width: 1024px) {
+            @content;
+        }
+    } 
+    @else if $point == tablet {
+        @media only screen and (min-width: 600px) {
+            @content;
+        }
+    }
+}
+
+// @include breakpoint(large) {
+//     div {
+//        font-size: 2rem;
+//        line-height: 1.4;
+//     }
+// }

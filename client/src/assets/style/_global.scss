@@ -1,0 +1,132 @@
+// #General
+body{
+    color: $grey;
+}
+
+img{
+    max-width: 100%;
+}
+
+.theme--light.v-application{
+    background: $white;
+}
+
+.v-app-bar.v-app-bar--fixed{
+    position: relative;
+}
+
+.background .v-application--wrap{
+    height: 100vh !important;
+    min-height: 100vh !important;
+}
+
+.v-application--wrap{
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.brand{
+    font-weight: bold !important;
+    color: $primary;
+}
+
+.menu-services{
+    max-width: 380px;
+    width: 380px !important;
+    background: $white;
+    max-height: 380px;
+
+    .title{
+        font-weight: 400;
+        color: $grey5;
+        text-align: center;
+        padding: 0.8rem 0 0.3rem;
+        border-bottom: 1px solid $grey4;
+        width: 100%;
+    }
+}
+
+.logo{
+    display: inline-block;
+
+    img{
+        max-width: 38px;
+        display: block;
+    }
+}
+
+// #Helpers
+.z-index999{
+    z-index: 99999;
+}
+
+.background#app {
+    background: url('/images/authentication/bg-login.jpg') no-repeat center center;
+    background-size: cover !important;
+}
+
+// #PreHeader
+.preheader-table{
+    padding: 0;
+    margin-bottom: 0.8rem;
+}
+
+// #Authentication
+.authentication{
+    position: relative;
+    
+    .form {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .border-separator{
+        div{
+            height: 500px;
+            width: 30px;
+            @include box-shadow(-21px 0 35px -7px $white2);
+            margin-top: -13%;
+            position: absolute;            
+        }
+    }
+}
+
+// #DataTable
+.customDataTable{
+    tbody{
+        tr{
+            td:first-child{
+                width: 10px;
+                padding: 0px;
+            }
+        }
+    }
+}
+.optionsButton{
+    height: 48px !important;
+    @include border-radius(0);
+    border-left: 1px solid $grey4;
+    border-right: 1px solid $grey4;
+    background: $white;
+
+    i{
+        color: $primary;
+        font-size: 1.2rem;
+    }
+}
+
+.optionsList{
+    min-width: 160px;
+
+    .optionsList-btn{
+        background-color: $white !important;
+
+        span{
+            text-transform: capitalize;
+            color: $primary;
+        }
+
+        i{
+            color: $primary;
+        }
+    }
+}

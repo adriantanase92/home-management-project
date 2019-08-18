@@ -3,7 +3,6 @@ import Dashboard from '@/views/Dashboard/Index.vue';
 import Users from '@/views/Users/Index.vue';
 import AddUser from '@/views/Users/Add.vue';
 import UpdateUser from '@/views/Users/Update.vue';
-import Posts from '@/views/Posts/Index.vue';
 
 export default {
     getRoutes: function(){
@@ -46,14 +45,6 @@ export default {
               component: UpdateUser,
               meta: {
                 title: 'Users - Update User',
-              },
-            },
-            {
-              path: '/posts',
-              name: 'posts',
-              component: Posts,
-              meta: {
-                title: 'Posts',
               },
             },
         ];

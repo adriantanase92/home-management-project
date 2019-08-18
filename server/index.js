@@ -17,10 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-const posts = require('./routes/api/posts');
 const users = require('./routes/api/users');
 
-app.use('/api/posts', posts);
 app.use('/api/users', users);
 
 //routes

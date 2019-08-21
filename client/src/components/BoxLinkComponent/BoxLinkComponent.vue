@@ -1,5 +1,5 @@
 <template>
-    <v-flex v-bind:class="item.size" class="boxLink elevation-1">
+    <v-flex v-bind:class="item.size" class="boxLink">
         <router-link class="boxLink-router" :to="item.link">
             <img class="boxLink-avatar" :src="item.path">
             <h2 class="boxLink-title">{{ item.title }}</h2>

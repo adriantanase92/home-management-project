@@ -9,6 +9,20 @@ export default {
       title: 'Users',
       subheading: 'Here you can add users',
     },
+    {
+      size: 'xs6 sm4 md3',
+      link: { name: Constants.ROUTES.EXPENSES },
+      path: '/images/dashboard/app_3_active.png',
+      title: 'Expenses',
+      subheading: 'Here you can add expense',
+    },
+    {
+      size: 'xs6 sm4 md3',
+      link: { name: Constants.ROUTES.REPORTS },
+      path: '/images/dashboard/app_4_active.png',
+      title: 'Reports',
+      subheading: 'Here you can see the reports',
+    },
   ],
   menuData: [
     {
@@ -16,6 +30,18 @@ export default {
       link: { name: Constants.ROUTES.USERS },
       path: '/images/dashboard/app_1_active.png',
       title: 'Users',
+    },
+    {
+      size: 'xs12 sm6',
+      link: { name: Constants.ROUTES.EXPENSES },
+      path: '/images/dashboard/app_3_active.png',
+      title: 'Expenses',
+    },
+    {
+      size: 'xs12 sm6',
+      link: { name: Constants.ROUTES.REPORTS },
+      path: '/images/dashboard/app_4_active.png',
+      title: 'Reports',
     },
   ],
   getDashboardData: function() {

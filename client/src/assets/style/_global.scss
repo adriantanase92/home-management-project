@@ -130,3 +130,18 @@ img{
         }
     }
 }
+
+// #Calendar
+.calendar{
+    &-header{
+        .v-toolbar__content{
+            padding: 0;
+        }
+    }
+
+    &-body{
+        border-top: 1px solid $grey4;
+        border-left: 1px solid $grey4;
+        border-color: $grey4 !important;
+    }
+}

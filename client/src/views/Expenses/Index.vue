@@ -1,7 +1,7 @@
 <template>
 <v-card class="pa-2">
     <v-card-title class="preheader-table">
-        <v-btn color="primary" depressed class="add-btn" :to="{name: constants.ROUTES.ADD_USER}"><i class="fas fa-plus-circle mr-2"></i> Add User</v-btn>
+        <v-btn color="primary" depressed class="add-btn" :to="{name: constants.ROUTES.ADD_EXPENSE}"><i class="fas fa-plus-circle mr-2"></i> Add Expense</v-btn>
         <v-spacer></v-spacer>
         <v-flex xs4 sm4 md2 lg2><v-text-field v-model="search" append-icon="fas fa-search" label="Search" single-line hide-details></v-text-field></v-flex>
     </v-card-title>
@@ -13,7 +13,7 @@
                 </template>
 
                 <v-list class="optionsList ma-0 pa-0">
-                    <v-btn tile block class="optionsList-btn text-lg-left" :to="{name: constants.ROUTES.UPDATE_USER, params: { id: item._id }}">Edit Item <i class="far fa-edit ml-auto"></i></v-btn>
+                    <v-btn tile block class="optionsList-btn text-lg-left" :to="{name: constants.ROUTES.UPDATE_EXPENSE, params: { id: item._id }}">Edit Item <i class="far fa-edit ml-auto"></i></v-btn>
                     <v-btn tile block class="optionsList-btn text-lg-left" @click="showModal(item._id, item.fullname)">Delete Item <i class="far fa-trash-alt ml-auto"></i></v-btn>
                 </v-list>
             </v-menu>
@@ -44,7 +44,7 @@
 
 <script>
 import Constants from '@/services/Constants';
-import UserAccessService from '@/services/UserAccessService';
+import ExpenseAccessService from '@/services/ExpenseAccessService';
 
 export default {
     data() {
@@ -59,24 +59,24 @@ export default {
                     value: 'actions'
                 },
                 {
-                    text: 'Username',
-                    value: 'username'
-                },
-                {
                     text: 'Name',
-                    value: 'fullname'
+                    value: 'name'
                 },
                 {
-                    text: 'Phone',
-                    value: 'phone'
+                    text: 'Type',
+                    value: 'type'
                 },
                 {
-                    text: 'Email',
-                    value: 'email'
+                    text: 'Cost',
+                    value: 'cost'
                 },
                 {
-                    text: 'Salary',
-                    value: 'salary'
+                    text: 'Paid by',
+                    value: 'paidBy'
+                },
+                {
+                    text: 'Status',
+                    value: 'status'
                 }
             ],
             items: [],
@@ -93,15 +93,15 @@ export default {
             this.itemName = name;
             this.dialog = true;
         },
-        deleteUser: function () {
-            UserAccessService.deleteUser(this.itemId)
+        deleteExpense: function () {
+            ExpenseAccessService.deleteExpense(this.itemId)
                 .then(res => {
                     this.onGetItems();
                     this.dialog = false;
                 });
         },
         onGetItems: function () {
-            UserAccessService.getUsers()
+            ExpenseAccessService.getExpenses()
                 .then(result => {
                     this.items = result.data;
                     this.loading = false;

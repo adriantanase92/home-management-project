@@ -9,10 +9,12 @@
                 <v-btn text icon v-bind="attrs" v-on="on" dark><i class="fas fa-th"></i></v-btn>
             </template>
 
-            <v-layout class="menu-services z-index999" text-xs-center row wrap>
-                <h3 class="title">Menu</h3>
-                <box-link-component v-for="item in serviceData" :item="item" :key="item.id"></box-link-component>
-            </v-layout>
+            <v-container fluid grid-list-xl>
+                <v-layout class="menu-services z-index999" text-xs-center row wrap>
+                    <h3 class="title">Menu</h3>
+                    <box-link-component v-for="item in serviceData" :item="item" :key="item.id"></box-link-component>
+                </v-layout>
+            </v-container>
         </v-menu>
         <v-menu offset-y fixed>
             <template v-slot:activator="{ on, attrs }">

@@ -98,6 +98,11 @@ img{
                 width: 10px;
                 padding: 0px;
             }
+            td{
+                .v-chip--label{
+                    @include border-radius(0 !important);
+                }
+            }
         }
     }
 }

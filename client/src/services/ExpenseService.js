@@ -1,48 +1,34 @@
 export default {
   dictionaryModel: {
     custom: {
-        // name: null,
-        // type: null,
-        // cost: null,
-        // paidBy: null,
-        // details: null        
-      fname: {
+      name: {
         required: () => 'This field is empty',
         min: 'This field must not contain less than 2 characters',
-        max: 'This field may not be greater than 100 characters'
+        max: 'This field may not be greater than 100 characters',
       },
-      lname: {
+      type: {
         required: () => 'This field is empty',
-        min: 'This field must not contain less than 2 characters',
-        max: 'This field may not be greater than 100 characters'
       },
-      username: {
+      fixedType: {
         required: () => 'This field is empty',
-        min: 'This field must not contain less than 2 characters',
-        max: 'This field may not be greater than 100 characters'
       },
-      password: {
+      month: {
         required: () => 'This field is empty',
-        regex:
-          'This field must not contain less than 8 characters, one symbol character and one capital letter'
       },
-      email: {
-        required: () => 'This field is empty',
-        email: 'This is not a valid email address'
-      },
-      phone: {
+      cost: {
         required: () => 'This field is empty',
         numeric: 'This field must contain only numeric characters',
-        min: 'This field must not contain less than 9 characters',
-        max: 'This field may not be greater than 10 characters'
+        min: 'This field must not contain less than 1 characters',
+        max: 'This field may not be greater than 100 characters',
       },
-      salary: {
+      paidBy: {
         required: () => 'This field is empty',
-        numeric: 'This field must contain only numeric characters',
+      },
+      details: {
         min: 'This field must not contain less than 3 characters',
-        max: 'This field may not be greater than 100 characters'
-      }
-    }
+        max: 'This field may not be greater than 500 characters',
+      },
+    },
   },
   getDictionaryModel: function() {
     return this.dictionaryModel;

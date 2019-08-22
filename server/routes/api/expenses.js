@@ -1,6 +1,5 @@
 const express = require('express');
 const mongodb = require('mongodb');
-const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -15,15 +14,15 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const expenses = await loadExpensesCollection();
     await expenses.insertOne({
-        fullname: `${req.body.fname} ${req.body.lname}`,
-        fname: req.body.fname,
-        lname: req.body.lname,
-        username: req.body.username,
-        email: req.body.email,
-        phone: req.body.phone,
-        salary: req.body.salary,
-        password: bcrypt.hashSync(req.body.password, 10),
-        createdAt: new Date()
+        name: req.body.name,
+        type: req.body.type,
+        fixedType: req.body.fixedType,
+        month: req.body.month,
+        cost: req.body.cost,
+        status: req.body.status,
+        paidBy: req.body.paidBy,
+        details: req.body.details,
+        createdAt: new Date()       
     });
     res.status(201).send();
 });
@@ -41,13 +40,14 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const expenses = await loadExpensesCollection();
     let editUser = {
-        fullname: `${req.body.fname} ${req.body.lname}`,
-        fname: req.body.fname,
-        lname: req.body.lname,
-        username: req.body.username,
-        email: req.body.email,
-        phone: req.body.phone,
-        salary: req.body.salary,
+        name: req.body.name,
+        type: req.body.type,
+        fixedType: req.body.fixedType,
+        month: req.body.month,
+        cost: req.body.cost,
+        status: req.body.status,
+        paidBy: req.body.paidBy,
+        details: req.body.details
     }
     let id = req.params.id;
     expenses.updateOne( { _id : new mongodb.ObjectID(id) }, { $set: editUser }, function (err, result) {

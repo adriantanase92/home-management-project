@@ -27,13 +27,12 @@
                 </v-flex> 
                 <v-flex sm6 v-if="expense.type === 'Fixed'">
                     <v-select
-                        
-                        ref="fixed"
-                        v-model="expense.fixed"
+                        ref="fixedType"
+                        v-model="expense.fixedType"
                         v-validate="'required'"
-                        :error-messages="errors.collect('fixed')"
-                        label="Fixed"
-                        data-vv-name="fixed"
+                        :error-messages="errors.collect('fixedType')"
+                        label="Fixed Type"
+                        data-vv-name="fixedType"
                         :items="fixedTypes"
                         required
                     ></v-select>
@@ -72,13 +71,17 @@
                 </v-flex>                
                 <v-flex sm6>
                     <v-autocomplete
+                        ref="paidBy"
                         v-model="expense.paidBy"
                         :items="users"
                         chips
                         label="Select"
-                        item-text="name"
-                        item-value="name"
+                        item-text="fullname"
+                        item-value="_id"
+                        v-validate="'required'" 
+                        :error-messages="errors.collect('paidBy')" 
                         multiple
+                        data-vv-name="paidBy"
                         >
                         <template v-slot:selection="data">
                             <v-chip
@@ -88,7 +91,7 @@
                             @click="data.select"
                             @click:close="remove(data.item)"
                             >
-                            {{ data.item.name }}
+                            {{ data.item.fullname }}
                             </v-chip>
                         </template>
                         <template v-slot:item="data">
@@ -97,7 +100,7 @@
                             </template>
                             <template v-else>
                             <v-list-item-content>
-                                <v-list-item-title v-html="data.item.name"></v-list-item-title>
+                                <v-list-item-title v-html="data.item.fullname"></v-list-item-title>
                                 <v-list-item-subtitle v-html="data.item.group"></v-list-item-subtitle>
                             </v-list-item-content>
                             </template>
@@ -108,7 +111,7 @@
                     <v-textarea
                         v-model="expense.details"
                         maxlength="500"
-                        v-validate="'required|min:3|max:500'"
+                        v-validate="'min:3|max:500'"
                         name="details"
                         label="Details"
                         :error-messages="errors.collect('details')"
@@ -128,6 +131,7 @@
 
 <script>
 import Constants from "@/services/Constants.js";
+import UserAccessService from "@/services/UserAccessService.js";
 import ExpenseService from "@/services/ExpenseService.js";
 import ExpenseAccessService from "@/services/ExpenseAccessService.js";
 
@@ -147,6 +151,8 @@ export default {
             expense: {
                 name: null,
                 type: null,
+                fixedType: null,
+                month: null,
                 cost: null,
                 status: 'Unpaid',
                 paidBy: null,
@@ -157,21 +163,31 @@ export default {
     },
     mounted() {
         this.reset();
+        this.getUsers();
         this.emptyCallbackErrorsList();
         this.$validator.localize("en", this.dictionary);
     },
     methods: {
+        getUsers() {         
+            UserAccessService.getUsers()
+            .then(result => { 
+                this.users = result.data;
+            })
+            .catch(err => reject(err));
+        },        
         reset() {
             this.$refs.form.reset();
         },
         onValidateAll() {
             let newItem = {
-                name: this.expens.name,
-                lname: this.expens.lname,
-                password: this.expens.password,
-                email: this.expens.email,
-                phone: this.expens.phone,
-                salary: this.expens.salary
+                name: this.expense.name,
+                type: this.expense.type,
+                fixedType: this.expense.fixedType,
+                month: this.expense.month,
+                cost: this.expense.cost,
+                status: 'Unpaid',
+                paidBy: this.expense.paidBy,
+                details: this.expense.details                
             };
 
             ExpenseAccessService.addExpense(newItem)

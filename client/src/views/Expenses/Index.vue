@@ -1,5 +1,5 @@
 <template>
-<v-card class="pa-2">
+<v-card class="pa-2 elevation-0">
     <v-card-title class="preheader-table">
         <v-btn color="primary" depressed class="add-btn" :to="{name: constants.ROUTES.ADD_EXPENSE}"><i class="fas fa-plus-circle mr-2"></i> Add Expense</v-btn>
         <v-spacer></v-spacer>
@@ -18,6 +18,9 @@
                 </v-list>
             </v-menu>
         </template>
+        <template v-slot:item.status="{ item }">
+            <v-chip class="text-lowercase" small label outlined :color="setColorByStatus(item.status)">{{ item.status }}</v-chip>
+        </template> 
     </v-data-table>
 
     <v-dialog v-model="dialog" width="500">
@@ -107,7 +110,14 @@ export default {
                     this.loading = false;
                 })
                 .catch(err => reject(err));
-        }
+        },
+        setColorByStatus: function(status){
+            if(status==='Unpaid'){
+                return 'primary';
+            }else{
+                return 'success';
+            }
+        }        
     }
 }
 </script>

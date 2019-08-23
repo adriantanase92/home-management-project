@@ -2,8 +2,8 @@
   <div class="box">
       <form ref="form">
         <v-container fluid grid-list-xl pa-3>
-            <v-layout row justify-space-between>
-                <v-flex sm6>
+            <v-layout row wrap>
+                <v-flex sm4>
                     <v-text-field 
                         ref="name"
                         v-model="expense.name" 
@@ -13,7 +13,7 @@
                         data-vv-name="name" 
                         required></v-text-field>
                 </v-flex>
-                <v-flex sm6>
+                <v-flex sm4>
                     <v-select
                         ref="type"
                         v-model="expense.type"
@@ -25,7 +25,7 @@
                         required
                     ></v-select>                                          
                 </v-flex> 
-                <v-flex sm6 v-if="expense.type === 'Fixed'">
+                <v-flex sm4 v-if="expense.type === 'Fixed'">
                     <v-select
                         ref="fixedType"
                         v-model="expense.fixedType"
@@ -37,17 +37,32 @@
                         required
                     ></v-select>
                 </v-flex>
-                <v-flex sm6 v-if="expense.type === 'Variabile'">
-                    <v-select
-                        ref="month"
-                        v-model="expense.month"
-                        v-validate="'required'"
-                        :error-messages="errors.collect('month')"
-                        label="Month"
-                        data-vv-name="month"
-                        :items="months"
-                        required
-                    ></v-select>                                                          
+                <v-flex sm4 v-if="expense.type === 'Variabile'">
+                    <v-dialog
+                        ref="dialog"
+                        v-model="modal"
+                        :return-value.sync="expense.date"
+                        full-width
+                        width="25%"
+                    >
+                        <template v-slot:activator="{ on }">
+                            <v-text-field
+                                ref="date"
+                                v-model="expense.date"
+                                v-validate="'required'"
+                                :error-messages="errors.collect('date')"                            
+                                label="Date"
+                                data-vv-name="date"
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
+                        </template>
+                        <v-date-picker :min="minDate" v-model="date" show-current landscape scrollable>
+                            <div class="flex-grow-1"></div>
+                            <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+                            <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                        </v-date-picker>
+                    </v-dialog>                                                                             
                 </v-flex>                             
                 <v-flex sm6>
                     <v-text-field 
@@ -69,7 +84,7 @@
                         disabled
                     ></v-select>
                 </v-flex>                
-                <v-flex sm6>
+                <v-flex sm12>
                     <v-autocomplete
                         ref="paidBy"
                         v-model="expense.paidBy"
@@ -143,16 +158,17 @@ export default {
         return {
             constants: Constants,
             callbackValidator: [],
+            date: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10),
+            modal: false,
             types: ['Fixed', 'Variabile'],
             statuses: ['Paid', 'Unpaid'],
             fixedTypes: ['Invoice', 'Debt', 'Credit', 'Deposit'],
             users: [],
-            months: [],
             expense: {
                 name: null,
                 type: null,
                 fixedType: null,
-                month: null,
+                date: null,
                 cost: null,
                 status: 'Unpaid',
                 paidBy: null,
@@ -161,13 +177,21 @@ export default {
             dictionary: ExpenseService.getDictionaryModel()
         };
     },
+    computed: {
+        minDate() {
+            return new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10);
+        },
+    },    
     mounted() {
         this.reset();
         this.getUsers();
         this.emptyCallbackErrorsList();
         this.$validator.localize("en", this.dictionary);
     },
-    methods: {
+    methods: { 
+        reset() {
+            this.$refs.form.reset();
+        },               
         getUsers() {         
             UserAccessService.getUsers()
             .then(result => { 
@@ -175,15 +199,12 @@ export default {
             })
             .catch(err => reject(err));
         },        
-        reset() {
-            this.$refs.form.reset();
-        },
         onValidateAll() {
             let newItem = {
                 name: this.expense.name,
                 type: this.expense.type,
                 fixedType: this.expense.fixedType,
-                month: this.expense.month,
+                date: this.expense.date,
                 cost: this.expense.cost,
                 status: 'Unpaid',
                 paidBy: this.expense.paidBy,
@@ -193,6 +214,7 @@ export default {
             ExpenseAccessService.addExpense(newItem)
                 .then(result => {
                     this.reset();
+                    window.epicAlert('Expense was added succesfully', "success", 3500);
                     this.$router.push({
                         name: Constants.ROUTES.EXPENSES
                     });

@@ -1,5 +1,5 @@
 <template>
-<v-card class="pa-2">
+<v-card class="pa-2 elevation-0">
     <v-card-title class="preheader-table">
         <v-btn color="primary" depressed class="add-btn" :to="{name: constants.ROUTES.ADD_USER}"><i class="fas fa-plus-circle mr-2"></i> Add User</v-btn>
         <v-spacer></v-spacer>
@@ -17,7 +17,7 @@
                     <v-btn tile block class="optionsList-btn text-lg-left" @click="showModal(item._id, item.fullname)">Delete Item <i class="far fa-trash-alt ml-auto"></i></v-btn>
                 </v-list>
             </v-menu>
-        </template>
+        </template>       
     </v-data-table>
 
     <v-dialog v-model="dialog" width="500">

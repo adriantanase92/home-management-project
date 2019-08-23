@@ -68,7 +68,7 @@ export default {
         }
       },
       {
-        path: "/expenses/update",
+        path: "/expenses/update/:id",
         name: "update-expense",
         component: UpdateExpense,
         meta: {

@@ -132,6 +132,7 @@
             </v-layout>
             <v-layout row>
                 <v-flex xs12 class="text-lg-right">
+                    <v-btn class="mr-4" color="secondary" :to="{name: constants.ROUTES.REPORTS}">Take me to Reports</v-btn>
                     <v-btn class="mr-4" :to="{name: constants.ROUTES.EXPENSES}">cancel</v-btn>
                     <v-btn color="primary" @click="submit">submit</v-btn>
                 </v-flex>

@@ -14,12 +14,12 @@
 
                 <v-list class="optionsList ma-0 pa-0">
                     <v-btn tile block class="optionsList-btn text-lg-left" :to="{name: constants.ROUTES.UPDATE_EXPENSE, params: { id: item._id }}">Edit Item <i class="far fa-edit ml-auto"></i></v-btn>
-                    <v-btn tile block class="optionsList-btn text-lg-left" @click="showModal(item._id, item.fullname)">Delete Item <i class="far fa-trash-alt ml-auto"></i></v-btn>
+                    <v-btn tile block class="optionsList-btn text-lg-left" @click="showModal(item._id, item.name)">Delete Item <i class="far fa-trash-alt ml-auto"></i></v-btn>
                 </v-list>
             </v-menu>
         </template>
         <template v-slot:item.status="{ item }">
-            <v-chip class="text-lowercase" small label outlined :color="setColorByStatus(item.status)">{{ item.status }}</v-chip>
+            <v-chip class="text-lowercase" x-small label outlined :color="item.color">{{ item.status }}</v-chip>
         </template> 
     </v-data-table>
 
@@ -38,7 +38,7 @@
 
               <div class="text-right pa-2">
                 <v-btn class="mr-2" color="black" text @click="dialog=false">Cancel</v-btn>
-                <v-btn color="primary" @click="deleteUser()">Yes, I'm sure</v-btn>
+                <v-btn color="primary" @click="deleteExpense()">Yes, I'm sure</v-btn>
               </div>
         </v-card>
     </v-dialog>
@@ -65,6 +65,10 @@ export default {
                     text: 'Name',
                     value: 'name'
                 },
+                {
+                    text: 'Date',
+                    value: 'start'
+                },                
                 {
                     text: 'Type',
                     value: 'type'
@@ -110,14 +114,7 @@ export default {
                     this.loading = false;
                 })
                 .catch(err => reject(err));
-        },
-        setColorByStatus: function(status){
-            if(status==='Unpaid'){
-                return 'primary';
-            }else{
-                return 'success';
-            }
-        }        
+        },       
     }
 }
 </script>

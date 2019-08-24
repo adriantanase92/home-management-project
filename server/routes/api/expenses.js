@@ -17,9 +17,11 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         type: req.body.type,
         fixedType: req.body.fixedType,
-        date: req.body.date,
+        start: req.body.date,
+        end: req.body.date,
         cost: req.body.cost,
         status: req.body.status,
+        color: req.body.color,
         paidBy: req.body.paidBy,
         details: req.body.details,
         createdAt: new Date()       
@@ -46,6 +48,7 @@ router.put('/:id', async (req, res) => {
         date: req.body.date,
         cost: req.body.cost,
         status: req.body.status,
+        color: req.body.color,
         paidBy: req.body.paidBy,
         details: req.body.details
     }

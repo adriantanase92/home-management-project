@@ -99,14 +99,12 @@
                         >
                         <template v-slot:selection="data">
                             <v-chip
-                            v-bind="data.attrs"
-                            :input-value="data.selected"
-                            close
-                            @click="data.select"
-                            @click:close="remove(data.item)"
-                            >
-                            {{ data.item.fullname }}
-                            </v-chip>
+                                v-bind="data.attrs"
+                                :input-value="data.selected"
+                                close
+                                @click="data.select"
+                                @click:close="remove(data.item)"
+                            >{{ data.item.fullname }}</v-chip>
                         </template>
                         <template v-slot:item="data">
                             <template v-if="typeof data.item !== 'object'">
@@ -134,6 +132,7 @@
             </v-layout>
             <v-layout row>
                 <v-flex xs12 class="text-lg-right">
+                    <v-btn class="mr-4" color="secondary" :to="{name: constants.ROUTES.REPORTS}">Take me to Reports</v-btn>
                     <v-btn class="mr-4" :to="{name: constants.ROUTES.EXPENSES}">cancel</v-btn>
                     <v-btn color="primary" @click="submit">submit</v-btn>
                 </v-flex>
@@ -157,7 +156,7 @@ export default {
         return {
             constants: Constants,
             callbackValidator: [],
-            date: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10),
+            date: new Date().toISOString().substr(0, 10),
             modal: false,            
             types: ['Fixed', 'Variabile'],
             statuses: ['Paid', 'Unpaid'],
@@ -171,6 +170,7 @@ export default {
                 date: null,
                 cost: null,
                 status: 'Unpaid',
+                color: null,
                 paidBy: null,
                 details: null
             },
@@ -179,7 +179,7 @@ export default {
     },
     computed: {
         minDate() {
-            return new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10);
+            return new Date().toISOString().substr(0, 10);
         },
     },    
     mounted() {
@@ -189,6 +189,13 @@ export default {
         this.getExpense(this.$route.params.id);
     },
     methods: {
+        getColor(status) {
+            if(status==='Paid'){
+                return 'success';
+            }else{
+                return 'primary';
+            }
+        },        
         getUsers() {         
             UserAccessService.getUsers()
             .then(result => { 
@@ -228,9 +235,9 @@ export default {
         }, 
         onValidateAll() {
             let that = this;
-            ExpenseAccessService.updateUser(that.$route.params.id, that.editExpense)
+            that.editExpense.color=this.getColor(that.editExpense.status);
+            ExpenseAccessService.updateExpense(that.$route.params.id, that.editExpense)
             .then(result => {
-                this.reset();
                 window.epicAlert('Expense was updated succesfully', "success", 3500);
                 this.$router.push({
                     name: Constants.ROUTES.EXPENSES

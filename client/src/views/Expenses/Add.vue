@@ -158,7 +158,8 @@ export default {
         return {
             constants: Constants,
             callbackValidator: [],
-            date: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10),
+            // date: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10),
+            date: new Date().toISOString().substr(0, 10),
             modal: false,
             types: ['Fixed', 'Variabile'],
             statuses: ['Paid', 'Unpaid'],
@@ -171,6 +172,7 @@ export default {
                 date: null,
                 cost: null,
                 status: 'Unpaid',
+                color: null,
                 paidBy: null,
                 details: null
             },
@@ -179,7 +181,7 @@ export default {
     },
     computed: {
         minDate() {
-            return new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().substr(0, 10);
+            return new Date().toISOString().substr(0, 10);
         },
     },    
     mounted() {
@@ -191,7 +193,14 @@ export default {
     methods: { 
         reset() {
             this.$refs.form.reset();
-        },               
+        },  
+        getColor(status) {
+            if(status==='Paid'){
+                return 'success';
+            }else{
+                return 'primary';
+            }
+        },             
         getUsers() {         
             UserAccessService.getUsers()
             .then(result => { 
@@ -207,6 +216,7 @@ export default {
                 date: this.expense.date,
                 cost: this.expense.cost,
                 status: 'Unpaid',
+                color: this.getColor(this.expense.status),
                 paidBy: this.expense.paidBy,
                 details: this.expense.details                
             };

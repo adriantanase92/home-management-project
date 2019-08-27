@@ -11,7 +11,7 @@ const ExpenseSchema = new Schema({
   cost: { type: Number, required: true },
   status: { type: String, required: true },
   color: { type: String },
-  paidBy: [ { type: ObjectId, required: true } ],
+  paidBy: [ { type: Object, required: true } ],
   details: { type: String },
   createdAt: { type: Date, default: Date.now } 
 })

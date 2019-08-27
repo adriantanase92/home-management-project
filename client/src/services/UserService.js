@@ -26,7 +26,6 @@ export default {
       },
       phone: {
         required: () => 'This field is empty',
-        numeric: 'This field must contain only numeric characters',
         min: 'This field must not contain less than 9 characters',
         max: 'This field may not be greater than 10 characters'
       },

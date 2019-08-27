@@ -44,6 +44,7 @@
                         :return-value.sync="expense.date"
                         full-width
                         width="25%"
+                        max-width="464px"
                     >
                         <template v-slot:activator="{ on }">
                             <v-text-field
@@ -97,6 +98,7 @@
                         :error-messages="errors.collect('paidBy')" 
                         multiple
                         data-vv-name="paidBy"
+                        return-object
                         >
                         <template v-slot:selection="data">
                             <v-chip
@@ -216,10 +218,12 @@ export default {
                 date: this.expense.date,
                 cost: this.expense.cost,
                 status: 'Unpaid',
-                color: this.getColor(this.expense.status),
+                color: null,
                 paidBy: this.expense.paidBy,
                 details: this.expense.details                
             };
+
+            newItem.color=this.getColor(newItem.status);
 
             ExpenseAccessService.addExpense(newItem)
                 .then(result => {

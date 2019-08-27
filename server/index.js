@@ -1,28 +1,34 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const config = require('./config');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const User = require('./models/User');
+
+// Set up mongoose connection
+const mongoose = require('mongoose');
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
+const db = mongoose.connection;
+db.on('error', (err) => console.log(err));
+
+// Imports routes
+const user = require('./routes/api/user.route');
+const expense = require('./routes/api/expense.route');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/vue_express', {
-    useNewUrlParser: true
-});
-
-// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-const users = require('./routes/api/users');
-const expenses = require('./routes/api/expenses');
+app.use('/api/users', user);
+app.use('/api/expenses', expense);
 
-app.use('/api/users', users);
-app.use('/api/expenses', expenses);
 
+const User = require('./models/user.model');
 //routes
 app.post("/login", (req, res, next) => {
     User.findOne({ username: req.body.username }, (err, user) => {
@@ -54,6 +60,6 @@ app.post("/login", (req, res, next) => {
     });
 });
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(config.PORT, () => {
+    mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true});
+});

@@ -7,7 +7,9 @@ export default {
         return new Promise(function (resolve, reject) {
             HttpService.get(url)
                 .then(result => resolve(result))
-                .catch(err => reject(err));
+                .catch(err => {
+                    return reject(err);
+                });
         });
     },
     addUser: function (user) {
@@ -49,11 +51,7 @@ export default {
         return new Promise(function (resolve, reject) {
             HttpService.delete(`${RestConstants.USERS}${id}`)
                 .then(result => {
-                    window.epicAlert(
-                        'item_deleted_success',
-                        'success',
-                        3500
-                    );
+                    window.epicAlert('item_deleted_success', 'success', 3500);
                     return resolve(result);
                 })
                 .catch(err => {

@@ -18,6 +18,11 @@
                 </v-list>
             </v-menu>
         </template>
+        <template v-slot:item.start="{ item }">
+            <div>
+                {{ item.start | formatDate }}
+            </div>
+        </template>         
         <template v-slot:item.paidBy="{ item }">
             <div>
                 <div v-for="(user, index) in item.paidBy" :key="index">{{ user.fullname }} <span v-if="index != Object.keys(item.paidBy).length - 1">,</span></div>
@@ -51,6 +56,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import Constants from '@/services/Constants';
 import ExpenseAccessService from '@/services/ExpenseAccessService';
 
@@ -99,6 +105,13 @@ export default {
     mounted() {
         this.onGetItems();
     },
+    filters: {
+        formatDate: function(value) {
+            if(value) {
+                return moment(String(value)).format('YYYY-MM-DD');
+            }
+        }
+    },    
     methods: {
         showModal: function (id, name) {
             this.itemId = id;

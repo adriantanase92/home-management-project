@@ -7,4 +7,5 @@ Home Management Project - Install Project
 4. Start the backend (from the root folder) with npm run server
 5. Start the frontend (from the client folder) with npm run serve
 6. Create a mongodb database named "vue_express" and create a single collection named "users"
-7. Login with username: adrian / password: Administrator@1
+7. Navigate, from terminal, to "seed" folder located in the "server" folder and run command "node user-seeder.js"
+8. Login with username: adrian / password: Administrator@1

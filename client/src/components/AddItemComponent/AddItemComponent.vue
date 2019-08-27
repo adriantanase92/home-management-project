@@ -3,31 +3,31 @@
     <v-container fluid grid-list-xl pa-3>
         <v-layout row justify-space-between>
             <v-flex sm6>
-                <v-text-field v-model="user.fname" v-validate="'required|min:2|max:100'" :error-messages="errors.collect('fname')" label="First Name" data-vv-name="fname" required></v-text-field>
+                <v-text-field prepend-icon="fas fa-user-alt" v-model="user.fname" v-validate="'required|min:2|max:100'" :error-messages="errors.collect('fname')" label="First Name" data-vv-name="fname" required></v-text-field>
             </v-flex>
             <v-flex sm6>
-                <v-text-field v-model="user.lname" v-validate="'required|min:2|max:100'" :error-messages="errors.collect('lname')" label="Last Name" data-vv-name="lname" required></v-text-field>
+                <v-text-field prepend-icon="fas fa-user-alt" v-model="user.lname" v-validate="'required|min:2|max:100'" :error-messages="errors.collect('lname')" label="Last Name" data-vv-name="lname" required></v-text-field>
             </v-flex>
             <v-flex sm6>
-                <v-text-field  v-model="user.username" v-validate="'required|min:2|max:100'" :error-messages="errors.collect('username')" label="Username" data-vv-name="username" required></v-text-field>
+                <v-text-field prepend-icon="fas fa-user-circle" v-model="user.username" v-validate="'required|min:2|max:100'" :error-messages="errors.collect('username')" label="Username" data-vv-name="username" required></v-text-field>
             </v-flex>
             <v-flex sm6>
                 <v-text-field :autocomplete="false" v-model="user.password" v-validate="{ rules: {required: true, regex: /(?=^.{8,32}$)(?=.*[0-9!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/} }" :error-messages="errors.collect('password')" label="Password" data-vv-name="password" prepend-icon="fas fa-lock" :append-icon="isPasswordVisible ? 'fas fa-eye' : 'fas fa-eye-slash'" @click:append="isPasswordVisible = !isPasswordVisible" :type="isPasswordVisible ? 'text' : 'password'" required></v-text-field>
             </v-flex>
             <v-flex sm4>
-                <v-text-field v-model="user.email" v-validate="'required|email'" :error-messages="errors.collect('email')" label="E-mail" data-vv-name="email" required></v-text-field>
+                <v-text-field prepend-icon="fas fa-envelope" v-model="user.email" v-validate="'required|email'" :error-messages="errors.collect('email')" label="E-mail" data-vv-name="email" required></v-text-field>
             </v-flex>
             <v-flex sm4>
-                <v-text-field v-model="user.phone" v-validate="'required|numeric|min:9|max:10'" :error-messages="errors.collect('phone')" label="Phone" data-vv-name="phone" required></v-text-field>
+                <v-text-field prepend-icon="fas fa-phone-alt" v-model="user.phone" v-validate="'required|min:9|max:10'" :error-messages="errors.collect('phone')" label="Phone" data-vv-name="phone" required></v-text-field>
             </v-flex>
             <v-flex sm4>
-                <v-text-field v-model="user.salary" v-validate="'required|numeric|min:3|max:100'" :error-messages="errors.collect('salary')" label="Salary" data-vv-name="salary" required></v-text-field>
+                <v-text-field prepend-icon="fas fa-piggy-bank" v-model="user.salary" v-validate="'required|numeric|min:3|max:100'" :error-messages="errors.collect('salary')" label="Salary" data-vv-name="salary" required></v-text-field>
             </v-flex>
          </v-layout>
         <v-layout row>
             <v-flex xs12 class="text-lg-right">
-                <v-btn class="mr-4" :to="{name: constants.ROUTES.USERS}">cancel</v-btn>
-                <v-btn color="primary" @click="submit">submit</v-btn>
+                <v-btn width="200px" class="mr-4" :to="{name: constants.ROUTES.USERS}">cancel <i class="fas fa-times ml-auto"></i></v-btn>
+                <v-btn width="200px" color="primary" @click="submit">submit <i class="fas fa-check ml-auto"></i></v-btn>
             </v-flex>
         </v-layout>
     </v-container>

@@ -3,17 +3,18 @@
       <form ref="form">
         <v-container fluid grid-list-xl pa-3>
             <v-layout row wrap>
-                <v-flex sm4>
+                <v-flex sm6>
                     <v-text-field 
                         ref="name"
                         v-model="expense.name" 
                         v-validate="'required|min:2|max:100'" 
                         :error-messages="errors.collect('name')" 
                         label="Name" 
-                        data-vv-name="name" 
+                        data-vv-name="name"
+                        prepend-icon="fas fa-wallet"
                         required></v-text-field>
                 </v-flex>
-                <v-flex sm4>
+                <v-flex sm6>
                     <v-select
                         ref="type"
                         v-model="expense.type"
@@ -23,9 +24,10 @@
                         data-vv-name="type"
                         :items="types"
                         required
+                        prepend-icon="fas fa-balance-scale"
                     ></v-select>                                          
                 </v-flex> 
-                <v-flex sm4 v-if="expense.type === 'Fixed'">
+                <v-flex sm6 v-if="expense.type === 'Fixed'">
                     <v-select
                         ref="fixedType"
                         v-model="expense.fixedType"
@@ -35,9 +37,10 @@
                         data-vv-name="fixedType"
                         :items="fixedTypes"
                         required
+                        prepend-icon="fas fa-hand-holding-usd"
                     ></v-select>
                 </v-flex>
-                <v-flex sm4 v-if="expense.type === 'Variabile'">
+                <v-flex sm6>
                     <v-dialog
                         ref="dialog"
                         v-model="modal"
@@ -56,6 +59,7 @@
                                 data-vv-name="date"
                                 readonly
                                 v-on="on"
+                                prepend-icon="far fa-calendar-alt"
                             ></v-text-field>
                         </template>
                         <v-date-picker :min="minDate" v-model="date" show-current landscape scrollable>
@@ -72,7 +76,8 @@
                         v-validate="'required|numeric|min:1|max:100'" 
                         :error-messages="errors.collect('cost')" 
                         label="Cost" 
-                        data-vv-name="cost" 
+                        data-vv-name="cost"
+                        prepend-icon="fas fa-money-bill-wave"
                         required></v-text-field>
                 </v-flex>
                 <v-flex sm6>
@@ -83,6 +88,7 @@
                         data-vv-name="status"
                         :items="statuses"
                         disabled
+                        prepend-icon="fas fa-star-half-alt"
                     ></v-select>
                 </v-flex>                
                 <v-flex sm12>
@@ -99,6 +105,7 @@
                         multiple
                         data-vv-name="paidBy"
                         return-object
+                        prepend-icon="fas fa-user-friends"
                         >
                         <template v-slot:selection="data">
                             <v-chip
@@ -132,13 +139,14 @@
                         name="details"
                         label="Details"
                         :error-messages="errors.collect('details')"
+                        prepend-icon="fas fa-comment-dots"
                     ></v-textarea>
                 </v-flex>
             </v-layout>
             <v-layout row>
                 <v-flex xs12 class="text-lg-right">
-                    <v-btn class="mr-4" :to="{name: constants.ROUTES.EXPENSES}">cancel</v-btn>
-                    <v-btn color="primary" @click="submit">submit</v-btn>
+                    <v-btn width="200px" class="mr-4" :to="{name: constants.ROUTES.EXPENSES}">cancel <i class="fas fa-times ml-auto"></i></v-btn>
+                    <v-btn width="200px" color="primary" @click="submit">submit <i class="fas fa-check ml-auto"></i></v-btn>
                 </v-flex>
             </v-layout>
         </v-container>

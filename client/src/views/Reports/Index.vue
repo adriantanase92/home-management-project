@@ -57,7 +57,6 @@
                                     <div class="regular font-weight-medium"><span class="font-weight-bold">Cost:</span> <span class="pl-2" v-html="selectedEvent.cost"></span> RON</div>
                                     <div class="regular font-weight-medium"><span class="font-weight-bold">Type:</span> <span class="pl-2" v-html="selectedEvent.type"></span></div>
                                     <div class="regular font-weight-medium" v-if="selectedEvent.fixedType"><span class="font-weight-bold">Fixed Type:</span> <span class="pl-2" v-html="selectedEvent.fixedType"></span></div>
-                                    <!-- <div class="regular font-weight-medium"><span class="font-weight-bold">Paid by:</span> <span class="pl-2">{{ selectedEvent.paidBy }}</span></div> -->
                                     <div class="regular font-weight-medium">
                                         <ul class="list-inline ma-0 pa-0">
                                             <span class="font-weight-bold">Paid by:</span>

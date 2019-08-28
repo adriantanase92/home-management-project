@@ -7,6 +7,10 @@ img{
     max-width: 100%;
 }
 
+.v-calendar .v-event.v-event-end{
+    width: 100%;
+}
+
 .theme--light.v-application{
     background: $white;
 }
@@ -67,6 +71,14 @@ img{
 .background#app {
     background: url('/images/authentication/bg-login.jpg') no-repeat center center;
     background-size: cover !important;
+}
+
+.list-inline{
+    list-style: none;
+
+    li{
+        display: inline-block;
+    }
 }
 
 // #PreHeader

@@ -44,7 +44,7 @@
                     <v-dialog
                         ref="dialog"
                         v-model="modal"
-                        :return-value.sync="editExpense.date"
+                        :return-value.sync="editExpense.start"
                         full-width
                         width="25%"
                         max-width="464px"
@@ -52,7 +52,7 @@
                         <template v-slot:activator="{ on }">
                             <v-text-field
                                 ref="date"
-                                v-model="editExpense.date"
+                                v-model="editExpense.start"
                                 v-validate="'required'"
                                 :error-messages="errors.collect('date')"                            
                                 label="Date"
@@ -177,7 +177,8 @@ export default {
                 name: null,
                 type: null,
                 fixedType: null,
-                date: null,
+                start: null,
+                end: null,
                 cost: null,
                 status: 'Unpaid',
                 color: null,
@@ -246,6 +247,7 @@ export default {
         onValidateAll() {
             let that = this;
             that.editExpense.color=this.getColor(that.editExpense.status);
+            that.editExpense.end=that.editExpense.start;
             ExpenseAccessService.updateExpense(that.$route.params.id, that.editExpense)
             .then(result => {
                 window.epicAlert('Expense was updated succesfully', "success", 3500);

@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const ExpenseSchema = new Schema({
   name: { type: String, trim: true, required: true },
   type: { type: String, required: true },
   fixedType: { type: String },
-  start: { type: Date },
-  end: { type: Date },
+  start: { type: String },
+  end: { type: String },
   cost: { type: Number, required: true },
   status: { type: String, required: true },
   color: { type: String },

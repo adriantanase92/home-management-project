@@ -218,7 +218,6 @@ export default {
             start,
             end
         }) {
-            // You could load expenses from an outside source (like database) now that we have the start and end dates on the calendar
             this.start = start
             this.end = end
         },

@@ -24,9 +24,9 @@
             </div>
         </template>         
         <template v-slot:item.paidBy="{ item }">
-            <div>
-                <div v-for="(user, index) in item.paidBy" :key="index">{{ user.fullname }} <span v-if="index != Object.keys(item.paidBy).length - 1">,</span></div>
-            </div>
+            <ul class="list-inline pa-0">
+                <li v-for="(user, index) in item.paidBy" :key="index">{{ user.fullname }}<span class="pr-1" v-if="index != Object.keys(item.paidBy).length - 1">,</span></li>
+            </ul>
         </template> 
         <template v-slot:item.status="{ item }">
             <v-chip class="text-lowercase" x-small label outlined :color="item.color">{{ item.status }}</v-chip>

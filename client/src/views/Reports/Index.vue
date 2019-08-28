@@ -61,7 +61,7 @@
                                     <div class="regular font-weight-medium">
                                         <ul class="list-inline ma-0 pa-0">
                                             <span class="font-weight-bold">Paid by:</span>
-                                            <li class="ml-1" v-for="(user, index) in selectedEvent.paidBy" :key="index">{{ user.fullname }} <span v-if="index != Object.keys(selectedEvent.paidBy).length - 1">,</span></li>
+                                            <li class="ml-1" v-for="(user, index) in selectedEvent.paidBy" :key="index">{{ user.fullname }}<span v-if="index != Object.keys(selectedEvent.paidBy).length - 1">,</span></li>
                                         </ul>
                                     </div>
                                     <div class="regular font-weight-medium"><span class="font-weight-bold">Details:</span> <span class="pl-2" v-html="selectedEvent.details"></span></div>

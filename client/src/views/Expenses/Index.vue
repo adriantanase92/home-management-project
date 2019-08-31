@@ -5,7 +5,7 @@
         <v-spacer></v-spacer>
         <v-flex xs4 sm4 md2 lg2><v-text-field v-model="search" append-icon="fas fa-search" label="Search" single-line hide-details></v-text-field></v-flex>
     </v-card-title>
-    <v-data-table v-if="items" class="customDataTable elevation-1" :headers="headers" :items="items" :search="search" :loading="loading">
+    <v-data-table v-if="items" class="customDataTable mb-4 elevation-1" :sort-by="['start']" :sort-desc="[true]" :headers="headers" :items="items" :search="search" :loading="loading">
         <template v-slot:item.actions="{ item }">
             <v-menu class="sdadad" offset-x>
                 <template v-slot:activator="{ on, attrs }">
@@ -32,6 +32,15 @@
             <v-chip class="text-lowercase" x-small label outlined :color="item.color">{{ item.status }}</v-chip>
         </template> 
     </v-data-table>
+
+    <v-layout row justify-space-between class="px-2">
+        <v-flex sm6>
+            <v-btn width="200px" color="secondary" class="text-none ml-1 mr-4" :to="{name: constants.ROUTES.DASHBOARD}">Back to Dashboard <i class="fas fa-times ml-auto"></i></v-btn>
+        </v-flex>
+        <v-flex class="text-right" sm6>
+            <v-btn width="200px" class="text-none mr-1" color="primary" :to="{name: constants.ROUTES.REPORTS}">Back to Reports <i class="fas fa-check ml-auto"></i></v-btn>                                          
+        </v-flex> 
+    </v-layout>     
 
     <v-dialog v-model="dialog" width="500">
 

@@ -66,8 +66,9 @@
                                     <div class="regular font-weight-medium"><span class="font-weight-bold">Details:</span> <span class="pl-2" v-html="selectedEvent.details"></span></div>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <div class="ml-auto"></div>
                                     <v-btn text color="primary" @click="selectedOpen = false">Cancel</v-btn>
+                                    <div class="ml-auto"></div>
+                                    <v-btn v-if="selectedEvent.color==='primary'" color="primary" @click.prevent="updateStatus(selectedEvent._id)">Update Status</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-menu>
@@ -132,6 +133,19 @@ export default {
             selectedElement: null,
             selectedOpen: false,
             expenses: [],
+            responseExpense: null,
+            editExpense: {
+                name: null,
+                type: null,
+                fixedType: null,
+                start: null,
+                end: null,
+                cost: null,
+                status: 'Unpaid',
+                color: null,
+                paidBy: null,
+                details: null
+            },            
         }
     },
     computed: {
@@ -200,6 +214,7 @@ export default {
             event
         }) {
             const open = () => {
+                this.getExpense(event._id);
                 this.selectedEvent = event
                 this.selectedElement = nativeEvent.target
                 setTimeout(() => this.selectedOpen = true, 10)
@@ -243,7 +258,70 @@ export default {
                 this.onGetItems();
                 this.dialog = false;
             });
-        },        
+        },
+        getColor(status) {
+            if(status==='Paid'){
+                return 'success';
+            }else{
+                return 'primary';
+            }
+        },
+        getExpense(id) {
+            let that = this;
+            ExpenseAccessService.getExpense(id)
+            .then(result => {
+                that.responseExpense = result.data;
+                that.getParser(result.data, that.editExpense);
+            });                
+        },
+        getParser: function(data, editExpense) {           
+            for(let item in data){ 
+                if(!editExpense.hasOwnProperty(item)){
+                    editExpense[item] = '';
+                }
+                editExpense[item] = data[item];
+            }           
+        }, 
+        jsonCompare(responseExpense) {
+            let that = this;
+            let isEqual = true;
+            for(let itemRU in responseExpense){ 
+                for(let itemEU in that.editExpense){
+                    if(itemRU === itemEU){
+                        if(responseExpense[itemRU] !== that.editExpense[itemEU]){
+                            isEqual = false;
+                        }
+                    }
+                }
+            }         
+            return isEqual;
+        },
+        onRequest(id, modelObj) {
+            ExpenseAccessService.updateExpense(id, modelObj)
+            .then(result => {
+                this.selectedOpen = false;
+                this.onGetItems();
+                window.epicAlert('Expense was updated succesfully', "success", 3500);
+            })
+            .catch(error => {
+                if(error.message) {
+                    window.epicAlert(error.message, 'error', 3500);
+                }
+            });
+        },                   
+        updateStatus: function (id) {
+            let that = this;
+
+            that.editExpense.status='Paid';
+            that.editExpense.color=this.getColor(that.editExpense.status); 
+
+            if(this.jsonCompare(this.responseExpense) === true){
+                return;
+            }
+            if(this.jsonCompare(this.responseExpense) !== true){
+               this.onRequest(id, that.editExpense);
+            }            
+        }        
     },
 }
 </script>

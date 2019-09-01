@@ -1,7 +1,13 @@
+import RestConstants from "./RestConstants";
+import Constants from "./Constants";
+import FormFactory from "./FormFactory";
+import FormErrorFactory from "./FormErrorFactory";
+
 import Login from "@/views/Authentication/Login.vue";
 import Dashboard from "@/views/Dashboard/Index.vue";
 import Users from "@/views/Users/Index.vue";
-import AddUser from "@/views/Users/Add.vue";
+// import AddUser from "@/views/Users/Add.vue";
+import AddUser from '@/views/add.vue';
 import UpdateUser from "@/views/Users/Update.vue";
 import Expenses from "@/views/Expenses/Index.vue";
 import AddExpense from "@/views/Expenses/Add.vue";
@@ -40,7 +46,23 @@ export default {
         name: "add-user",
         component: AddUser,
         meta: {
-          title: "Users - Add User"
+          title: "Users - Add User",
+          config: {
+            url: RestConstants.USERS,
+            listRoute: Constants.ROUTES.USERS,
+            customOptions: {},
+            itemModel: {
+              fname: null,
+              lname: null,
+              username: null,
+              password: null,
+              email: null,
+              phone: null,
+              salary: null,
+            },
+            fields: FormFactory.getUserModel(),
+            errorsItems: FormErrorFactory.getUserErrorModel()
+          }
         }
       },
       {

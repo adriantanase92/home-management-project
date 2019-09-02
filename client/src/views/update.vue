@@ -76,9 +76,9 @@ export default {
             let that = this;
             let isEqual = true;
             for(let itemRU in responseItem){ 
-                for(let itemEU in that.itemModel){
+                for(let itemEU in that.configObj.itemModel){
                     if(itemRU === itemEU){
-                        if(responseItem[itemRU] !== that.itemModel[itemEU]){
+                        if(responseItem[itemRU] !== that.configObj.itemModel[itemEU]){
                             isEqual = false;
                         }
                     }
@@ -87,15 +87,14 @@ export default {
             return isEqual;
         },
         onValidateAll() {
-            let that = this;
-
+            this.configObj.itemModel.fullname = `${this.configObj.itemModel.fname} ${this.configObj.itemModel.lname}`;
             HttpService.put(`${this.url}${this.configObj.itemId}`, this.configObj.itemModel)
             .then(result => {
+                 console.log(this.configObj.itemModel.fullname);
                 window.epicAlert('Item was updated successfully', 'success', 3500);
                 this.$router.push({ name: this.configObj.listRoute });
             })
             .catch((err) => { window.epicAlert(err.message, "error", 3500); }); 
-            
         },
         submit() {
             let v = this.$validator;

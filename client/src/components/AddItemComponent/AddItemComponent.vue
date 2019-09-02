@@ -49,19 +49,20 @@
 </template>
 
 <script>
-import UserService from "@/services/UserService.js";
-import UserAccessService from "@/services/UserAccessService.js";
-import FormFactory from "@/services/FormFactory.js";
-
 export default {
     $_veeValidate: {
         validator: "new"
     },
-    props: ['configObj', 'field', 'formName'],
+    props: ['configObj', 'field', 'formName', 'validator'],
     data() {
         return {
             isPasswordVisible: false
         };
+    },
+    created() {
+        if(this.validator) {
+            this.$validator = this.validator;
+        }
     },
     mounted () {
         this.$validator.localize("en", this.dictionary);

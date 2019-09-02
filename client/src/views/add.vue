@@ -7,7 +7,8 @@
                 v-for="field in configObj.fieldsData" 
                 :field="field"
                 :key="field.id"
-                :configObj="configObj">
+                :configObj="configObj"
+                :validator="$validator">
             </add-item-component> 
         </v-layout>
 
@@ -38,17 +39,16 @@ export default {
             url: this.$route.meta.config.url,
             configObj: {
                 listRoute: this.$route.meta.config.listRoute,
-                customOptions: this.$route.meta.config.customOptions,
                 fieldsData: this.$route.meta.config.fields,
-                itemModel: this.$route.meta.config.itemModel
+                itemModel: this.$route.meta.config.itemModel,
+                dictionary: this.$route.meta.config.errorsItems
             },
-            dictionary: this.$route.meta.config.errorsItems
         }
-    },
+    },    
     mounted() {
         this.reset();
         this.emptyCallbackErrorsList();
-        this.$validator.localize("en", this.dictionary);
+        this.$validator.localize("en", this.configObj.dictionary);
     },
     methods: {
         reset() {

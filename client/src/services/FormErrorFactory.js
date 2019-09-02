@@ -41,5 +41,5 @@ export default {
 
   getUserErrorModel() {
     return this.userErrorData;
-  }
+  },
 };

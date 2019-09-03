@@ -45,15 +45,31 @@
             :counter="field.counter"
             :id="field.id"
         ></v-text-field>
+        <picker-component v-else-if="field.type=='picker'" 
+            :field="field" 
+            :configObj="configObj"
+            :minDate="minDate"
+        ></picker-component>
+        <autocomplete-component v-else-if="field.type=='autocomplete'" 
+            :field="field" 
+            :configObj="configObj"
+        ></autocomplete-component>
     </v-flex>
 </template>
 
 <script>
+import PickerComponent from '../PickerComponent/PickerComponent';
+import AutocompleteComponent from '../AutocompleteComponent/AutocompleteComponent';
+
 export default {
     $_veeValidate: {
         validator: "new"
     },
-    props: ['configObj', 'field', 'formName', 'validator'],
+    components: {
+        PickerComponent,
+        AutocompleteComponent
+    },    
+    props: ['configObj', 'field', 'formName', 'validator', 'minDate'],
     data() {
         return {
             isPasswordVisible: false

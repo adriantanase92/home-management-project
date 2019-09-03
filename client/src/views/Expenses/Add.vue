@@ -203,7 +203,11 @@ export default {
     methods: { 
         reset() {
             this.$refs.form.reset();
-        },  
+        }, 
+        remove (item) {
+            const index = this.expense.paidBy.indexOf(item.fullname);
+            if (index >= 0 || index <= 0) this.expense.paidBy.splice(index, 1)
+        },         
         getColor(status) {
             if(status==='Paid'){
                 return 'success';

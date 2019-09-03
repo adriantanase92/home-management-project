@@ -3,13 +3,13 @@
     <v-container fluid grid-list-xl pa-3>
         
         <v-layout row justify-space-between v-if="configObj.fieldsData.length > 0">
-            <update-item-component 
+            <form-component 
                 v-for="field in configObj.fieldsData" 
                 :field="field"
                 :key="field.id"
                 :configObj="configObj"
                 :validator="$validator">
-            </update-item-component> 
+            </form-component> 
         </v-layout>
 
         <v-layout row>
@@ -24,14 +24,14 @@
 
 <script>
 import HttpService from '@/services/HttpService';
-import UpdateItemComponent from '@/components/UpdateItemComponent/UpdateItemComponent';
+import FormComponent from '@/components/FormComponent/FormComponent';
 
 export default {
     $_veeValidate: {
         validator: 'new'
     },
     components: {
-        UpdateItemComponent
+        FormComponent
     },
     data () {
         return {

@@ -47,12 +47,19 @@ export default {
     },    
     mounted() {
         this.reset();
+        this.cleaningObj(this.configObj.itemModel);
         this.emptyCallbackErrorsList();
         this.$validator.localize("en", this.configObj.dictionary);
     },
     methods: {
         reset() {
             this.$refs.form.reset();
+        },
+        cleaningObj(modelObj) {
+            for(let item in modelObj){ 
+                modelObj[item] = null;
+            }
+            return modelObj;
         },
         onValidateAll(model) {
             let newItem = {};
@@ -63,19 +70,12 @@ export default {
             HttpService.post(this.url, newItem)
             .then((response) => {
                 window.epicAlert('Item was added successfully', "success", 3500);
-                this.$router.push({
-                    name: this.configObj.listRoute
-                });
+                this.$router.push({ name: this.configObj.listRoute });
             })
             .catch((err) => { window.epicAlert(err.message, "error", 3500); });            
         },
         emptyCallbackErrorsList: function () {
             this.callbackValidator = [];
-        },
-        triggerFormValidator: function () {
-            for (let i = 0; i < this.callbackValidator.length; i += 1) {
-                this.callbackValidator[i]();
-            }
         },
         submit() {
             let v = this.$validator;

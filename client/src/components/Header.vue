@@ -1,9 +1,24 @@
 <template>
 <v-app id="inspire">
+    <v-navigation-drawer
+        v-model="drawer"
+        app
+        clipped
+        left
+        temporary
+    >
+        <div  class="fill-height">
+            <ul class="ma-0 pa-0">
+                <li><v-btn v-bind:class="[this.$router.history.current.name === constants.ROUTES.REPORTS ? 'action-active' : '']" class="elevation-0 border-radius-0 btn-normal" text depressed block :to="{name: constants.ROUTES.REPORTS}">Calendar Report <v-icon small class="ml-auto">mdi-calendar-month</v-icon></v-btn></li>
+                <li><v-btn v-bind:class="[this.$router.history.current.name === constants.ROUTES.REPORTS_BOXES ? 'action-active' : '']" class="elevation-0 border-radius-0 btn-normal" text depressed block :to="{name: constants.ROUTES.REPORTS_BOXES}">Box Report <v-icon small class="ml-auto">mdi-package</v-icon></v-btn></li>
+            </ul>
+        </div>
+    </v-navigation-drawer>    
     <v-app-bar app dense clipped-right color="primary" dark>
-        <router-link :to="{name: constants.ROUTES.DASHBOARD}" class="logo mr-4"><img :src="require('../assets/images/white-logo.png')" alt="EPIC"></router-link>
+        <router-link :to="{name: constants.ROUTES.DASHBOARD}" v-bind:class="[this.$route.meta.hasSubMenu ? 'mr-1' : 'mr-4']" class="logo"><img :src="require('../assets/images/white-logo.png')" alt="EPIC"></router-link>
+        <v-btn v-if="this.$route.meta.hasSubMenu" icon dark @click.stop="drawer = !drawer"><v-icon>mdi-menu</v-icon></v-btn>
         <v-toolbar-title>{{ $route.meta.title }}</v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>        
         <v-menu offset-y fixed>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn text icon v-bind="attrs" v-on="on" dark><i class="fas fa-th"></i></v-btn>
@@ -51,6 +66,7 @@ export default {
     data: () => ({
         constants: Constants,
         serviceData: DashboardService.getMenuData(),
+        drawer: null,
     }),
     methods: {
         logout() {

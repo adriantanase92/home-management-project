@@ -8,12 +8,12 @@ import Login from '@/views/Authentication/Login.vue';
 import Dashboard from '@/views/Dashboard/Index.vue';
 import Users from '@/views/list.vue';
 import AddUser from '@/views/add.vue';
-// import UpdateUser from '@/views/Users/Update.vue';
 import UpdateUser from '@/views/update.vue';
 import Expenses from '@/views/Expenses/Index.vue';
 import AddExpense from '@/views/Expenses/Add.vue';
 import UpdateExpense from '@/views/Expenses/Update.vue';
 import Reports from '@/views/Reports/Index.vue';
+import ReportsBoxes from '@/views/Reports/Boxes.vue';
 
 export default {
   getRoutes() {
@@ -125,6 +125,16 @@ export default {
         component: Reports,
         meta: {
           title: 'Reports',
+          hasSubMenu: true,
+        },
+      },
+      {
+        path: '/reports-boxes',
+        name: 'reports-boxes',
+        component: ReportsBoxes,
+        meta: {
+          title: 'Reports - Boxes',
+          hasSubMenu: true,
         },
       },
     ];

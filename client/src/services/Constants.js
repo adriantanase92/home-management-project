@@ -9,6 +9,7 @@ export default {
     ADD_EXPENSE: 'add-expense',
     UPDATE_EXPENSE: 'update-expense',
     REPORTS: 'reports',
+    REPORTS_BOXES: 'reports-boxes',
     PROFILE: 'profile',
     PROFILE_CHANGE_PASSWORD: 'change-password-profile',
   },

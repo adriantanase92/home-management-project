@@ -154,7 +154,6 @@
 
 <script>
 import Constants from "@/services/Constants.js";
-import UserAccessService from "@/services/UserAccessService.js";
 import ExpenseService from "@/services/ExpenseService.js";
 import ExpenseAccessService from "@/services/ExpenseAccessService.js";
 
@@ -208,7 +207,7 @@ export default {
             }
         },        
         getUsers() {         
-            UserAccessService.getUsers()
+            ExpenseAccessService.getUsers()
             .then(result => { 
                 this.users = result.data;
             })

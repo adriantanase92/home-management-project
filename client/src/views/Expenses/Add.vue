@@ -172,7 +172,7 @@ export default {
             modal: false,
             types: ['Fixed', 'Variabile'],
             statuses: ['Paid', 'Unpaid'],
-            fixedTypes: ['Invoice', 'Debt', 'Credit', 'Deposit'],
+            fixedTypes: ['Abonament', 'Credit', 'Deposit', 'Debt', 'Invoice'],
             users: [],
             expense: {
                 name: null,

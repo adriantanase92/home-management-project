@@ -8,6 +8,10 @@
         temporary
     >
         <div  class="fill-height">
+            <div class="pa-4 text-center">
+                <span class="title">Menu</span>
+                <v-divider></v-divider>
+            </div>
             <ul class="ma-0 pa-0">
                 <li><v-btn v-bind:class="[this.$router.history.current.name === constants.ROUTES.REPORTS ? 'action-active' : '']" class="elevation-0 border-radius-0 btn-normal" text depressed block :to="{name: constants.ROUTES.REPORTS}">Calendar Report <v-icon small class="ml-auto">mdi-calendar-month</v-icon></v-btn></li>
                 <li><v-btn v-bind:class="[this.$router.history.current.name === constants.ROUTES.REPORTS_BOXES ? 'action-active' : '']" class="elevation-0 border-radius-0 btn-normal" text depressed block :to="{name: constants.ROUTES.REPORTS_BOXES}">Box Report <v-icon small class="ml-auto">mdi-package</v-icon></v-btn></li>

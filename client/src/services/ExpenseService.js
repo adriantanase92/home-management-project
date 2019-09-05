@@ -32,5 +32,5 @@ export default {
   },
   getDictionaryModel: function() {
     return this.dictionaryModel;
-  }
+  },
 };

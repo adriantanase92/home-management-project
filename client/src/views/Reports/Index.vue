@@ -79,11 +79,11 @@
     </v-layout>
     <v-layout row justify-space-between>
         <v-flex sm6>
-            <v-btn width="200px" color="secondary" class="text-none ml-1 mr-4" :to="{name: constants.ROUTES.EXPENSES}">Back to Expenses <i class="fas fa-times ml-auto"></i></v-btn>
+            <v-btn depressed width="200px" color="secondary" class="text-none ml-1 mr-4" :to="{name: constants.ROUTES.EXPENSES}"><i class="fas fa-long-arrow-alt-left mr-auto"></i> Back to Expenses</v-btn>
         </v-flex>
         <v-flex class="text-right" sm6>
-            <v-btn width="200px" class="text-none mr-1" color="primary" :to="{name: constants.ROUTES.DASHBOARD}">Back to Dashboard <i class="fas fa-check ml-auto"></i></v-btn>                                          
-        </v-flex> 
+            <v-btn depressed width="200px" class="text-none mr-1" color="primary" :to="{name: constants.ROUTES.DASHBOARD}">Back to Dashboard <i class="fas fa-long-arrow-alt-right ml-auto"></i></v-btn>                                          
+        </v-flex>
     </v-layout>    
     <v-dialog v-model="dialog" width="500">
         <v-card>

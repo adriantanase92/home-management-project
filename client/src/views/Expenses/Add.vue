@@ -156,7 +156,6 @@
 
 <script>
 import Constants from "@/services/Constants.js";
-import UserAccessService from "@/services/UserAccessService.js";
 import ExpenseService from "@/services/ExpenseService.js";
 import ExpenseAccessService from "@/services/ExpenseAccessService.js";
 
@@ -173,7 +172,7 @@ export default {
             modal: false,
             types: ['Fixed', 'Variabile'],
             statuses: ['Paid', 'Unpaid'],
-            fixedTypes: ['Invoice', 'Debt', 'Credit', 'Deposit'],
+            fixedTypes: ['Abonament', 'Credit', 'Deposit', 'Debt', 'Invoice'],
             users: [],
             expense: {
                 name: null,
@@ -216,7 +215,7 @@ export default {
             }
         },             
         getUsers() {         
-            UserAccessService.getUsers()
+            ExpenseAccessService.getUsers()
             .then(result => { 
                 this.users = result.data;
             })

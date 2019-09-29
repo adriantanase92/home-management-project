@@ -1,7 +1,8 @@
 <template>
 <v-card class="pa-2 elevation-0">
     <v-card-title class="preheader-table">
-        <v-btn color="primary" depressed class="add-btn" :to="{name: configObj.addRoute}"><i class="fas fa-plus-circle mr-2"></i> Add Item</v-btn>
+        <v-btn color="primary" depressed class="add-btn mr-4" :to="{name: configObj.addRoute}"><i class="fas fa-plus-circle mr-2"></i> Add Item</v-btn>
+        <v-btn width="200px" color="secondary" class="text-none" :to="{name: constants.ROUTES.DASHBOARD}">Back to Dashboard <i class="fas fa-times ml-auto"></i></v-btn>
         <v-spacer></v-spacer>
         <v-flex xs4 sm4 md2 lg2><v-text-field v-model="search" append-icon="fas fa-search" label="Search" single-line hide-details></v-text-field></v-flex>
     </v-card-title>

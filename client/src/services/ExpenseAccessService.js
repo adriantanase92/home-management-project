@@ -1,5 +1,5 @@
-import HttpService from "./HttpService";
-import RestConstants from "./RestConstants";
+import HttpService from './HttpService';
+import RestConstants from './RestConstants';
 
 export default {
   getUsers() {
@@ -10,14 +10,6 @@ export default {
         .catch(err => {
           return reject(err);
         });
-    });
-  },
-  getExpense() {
-    const url = RestConstants.EXPENSES;
-    return new Promise(function(resolve, reject) {
-      HttpService.get(url)
-        .then(result => resolve(result))
-        .catch(err => reject(err));
     });
   },
   getExpenses() {

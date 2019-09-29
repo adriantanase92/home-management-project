@@ -71,7 +71,7 @@ export default {
       label: 'Phone',
       errors: null,
       name: 'phone',
-      icon: 'fas fa-phone-alt',
+      icon: 'fas fa-phone',
     },
     {
       size: 'xs12 sm4',
@@ -139,7 +139,7 @@ export default {
       label: 'Phone',
       errors: null,
       name: 'phone',
-      icon: 'fas fa-phone-alt',
+      icon: 'fas fa-phone',
     },
     {
       size: 'xs12 sm4',
